@@ -7,12 +7,16 @@ document.body.appendChild(renderer.domElement);
 
 const controls = new THREE.OrbitControls( camera, renderer.domElement );
 
-const geometry = new THREE.BoxGeometry();
+const geometry = new THREE.ConeGeometry(3.1, 5, 3);
 const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+const pyramid = new THREE.Mesh(geometry, material);
+scene.add(pyramid);
 
-camera.position.z = 5;
+const edges = new THREE.EdgesGeometry(geometry);
+const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color: 0xffffff}));
+scene.add(line);
+
+camera.position.z = 10;
 
 function getMouseXMovement() {
     let initialX;
